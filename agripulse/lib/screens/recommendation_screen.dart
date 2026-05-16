@@ -49,11 +49,12 @@ class _RecommendationTabScreenState extends State<RecommendationTabScreen> {
       final cached = await _predictionService.getCachedPredictionForCurrentWeek(
         countyId: widget.countyId,
       );
-      if (mounted)
+      if (mounted) {
         setState(() {
           _cached = cached;
           _isLoading = false;
         });
+      }
     } catch (_) {
       if (mounted) setState(() => _isLoading = false);
     }

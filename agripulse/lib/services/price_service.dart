@@ -6,11 +6,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class PriceService {
   final _supabase = Supabase.instance.client;
 
- 
-  // --dart-define=PREDICTION_API_URL=http://127.0.0.1:8000/api/predict/
-  // For Android emulator,  http://10.0.2.2:8000/api/predict/
-  static const String _defaultPredictionApiUrl =
+  static const String _primaryPredictionApiUrl =
       'https://agripulse-recommender.onrender.com/predict/';
+  static const String _fallbackPredictionApiUrl =
+      'http://127.0.0.1:8000/predict/';
+
+  static const String _defaultPredictionApiUrl = _primaryPredictionApiUrl;
+
   static const String _predictionApiUrl = String.fromEnvironment(
     'PREDICTION_API_URL',
     defaultValue: _defaultPredictionApiUrl,
@@ -24,7 +26,8 @@ class PriceService {
   /// Falls back to 0.0 if the backend is unreachable.
   Future<double> getCurrentPriceFromDataset(String countyName) async {
     final baseUrl = _predictionApiUrl.replaceAll(RegExp(r'/predict/?$'), '');
-    final url = '$baseUrl/current_price?county=${Uri.encodeComponent(countyName)}';
+    final url =
+        '$baseUrl/current_price?county=${Uri.encodeComponent(countyName)}';
     try {
       final response = await http
           .get(
@@ -90,7 +93,9 @@ class PriceService {
       }
       throw Exception('API Error ${response.statusCode}: ${response.body}');
     } catch (e) {
-      throw Exception('Connection to forecast range API failed at $rangeUrl: $e');
+      throw Exception(
+        'Connection to forecast range API failed at $rangeUrl: $e',
+      );
     }
   }
 
@@ -225,10 +230,12 @@ class PriceService {
     int? dateRange,
     String referenceDate,
   ) async {
-    return await getRegressionForecast(countyName, dateRange ?? 1, referenceDate);
+    return await getRegressionForecast(
+      countyName,
+      dateRange ?? 1,
+      referenceDate,
+    );
   }
-
-
 
   (double, double) extractWeekPredictions(
     Map<String, dynamic> payload,
