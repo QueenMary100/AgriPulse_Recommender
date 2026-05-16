@@ -32,7 +32,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // Day 1 = tomorrow (first selectable). Initialise there so the picker
   // opens on a valid date and the horizon calculation is always >= 1.
   DateTime _selectedDate = DateUtils.dateOnly(
-      DateTime.now().add(const Duration(days: 1)));
+    DateTime.now().add(const Duration(days: 1)),
+  );
 
   // Prediction result fields
   double _predictedPrice = 0;
@@ -57,11 +58,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
       await Future.wait([
         _priceService
             .getCurrentPriceFromDataset(countyName)
-            .then((p) { datasetPrice = p; })
+            .then((p) {
+              datasetPrice = p;
+            })
             .catchError((_) {}),
         _predictionService
             .getCachedPredictionForCurrentWeek(countyId: county)
-            .then((c) { cached = c; })
+            .then((c) {
+              cached = c;
+            })
             .catchError((_) {}),
       ]);
 
@@ -96,17 +101,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
       if (_countyId == null) throw Exception('County is not loaded yet.');
 
       // Fetch dataset price; fall back to last known price if backend offline.
-      final datasetPrice =
-          await _priceService.getCurrentPriceFromDataset(_location);
+      final datasetPrice = await _priceService.getCurrentPriceFromDataset(
+        _location,
+      );
       final priceToUse = datasetPrice > 0 ? datasetPrice : _currentPrice;
       if (priceToUse <= 0) {
-        throw Exception(
-            'Current market price is unavailable for this county.');
+        throw Exception('Current market price is unavailable for this county.');
       }
 
       // Day offset: tomorrow = Day 1, max = Day 14.
-      final diff =
-          _selectedDate.difference(DateUtils.dateOnly(DateTime.now())).inDays;
+      final diff = _selectedDate
+          .difference(DateUtils.dateOnly(DateTime.now()))
+          .inDays;
 
       final prediction = await _predictionService.predictForCurrentWeek(
         countyId: _countyId!,
@@ -132,9 +138,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } catch (e) {
       setState(() => _isPredicting = false);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Prediction Error: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Prediction Error: $e')));
       }
     }
   }
@@ -162,7 +168,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return const Center(
-          child: CircularProgressIndicator(color: Colors.green));
+        child: CircularProgressIndicator(color: Colors.green),
+      );
     }
 
     return CustomScaffold(
@@ -174,8 +181,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             Text(
               'Hello $_userName!',
-              style:
-                  const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
 
@@ -188,8 +194,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Current Maize Price',
-                          style: TextStyle(color: Colors.black54)),
+                      const Text(
+                        'Current Maize Price',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         formatBagPrice(_currentPrice),
@@ -199,9 +207,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Text('per 90 kg bag',
-                          style:
-                              TextStyle(color: Colors.black45, fontSize: 12)),
+                      const Text(
+                        'per 90 kg bag',
+                        style: TextStyle(color: Colors.black45, fontSize: 12),
+                      ),
                     ],
                   ),
                   Image.asset('assets/images/dashboardimage.png', width: 100),
@@ -217,9 +226,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Select Forecast Date',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  const Text(
+                    'Select Forecast Date',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: _pickForecastDate,
@@ -227,7 +237,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 14),
+                        horizontal: 12,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black26),
                         borderRadius: BorderRadius.circular(12),
@@ -237,14 +249,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.calendar_today,
-                                  color: kGreen, size: 20),
+                              const Icon(
+                                Icons.calendar_today,
+                                color: kGreen,
+                                size: 20,
+                              ),
                               const SizedBox(width: 10),
                               Text(
-                                MaterialLocalizations.of(context)
-                                    .formatMediumDate(_selectedDate),
+                                MaterialLocalizations.of(
+                                  context,
+                                ).formatMediumDate(_selectedDate),
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ],
                           ),
@@ -253,9 +270,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               Text(
                                 'Day ${_selectedDate.difference(DateUtils.dateOnly(DateTime.now())).inDays}',
                                 style: const TextStyle(
-                                    color: kGreen,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13),
+                                  color: kGreen,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
                               ),
                               const Icon(Icons.arrow_drop_down),
                             ],
@@ -267,8 +285,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   const SizedBox(height: 8),
                   Text(
                     'Day 1 (tomorrow) to Day 14 from today.',
-                    style:
-                        TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                   ),
                 ],
               ),
@@ -282,9 +299,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Price Forecast',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  const Text(
+                    'Price Forecast',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                   if (_showPredictions) ...[
                     const SizedBox(height: 6),
                     Text(
@@ -300,7 +318,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Text(
                         'Saved at ${_predictionTime!.toLocal()}',
                         style: const TextStyle(
-                            color: Colors.black45, fontSize: 11),
+                          color: Colors.black45,
+                          fontSize: 11,
+                        ),
                       ),
                   ],
                   const SizedBox(height: 15),
@@ -317,18 +337,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Text(
                         'Model: $_model',
                         style: const TextStyle(
-                            color: Colors.black38, fontSize: 11),
+                          color: Colors.black38,
+                          fontSize: 11,
+                        ),
                       ),
                     ],
                   ] else
                     const Center(
                       child: Column(
                         children: [
-                          Icon(Icons.auto_graph,
-                              size: 40, color: Colors.black12),
+                          Icon(
+                            Icons.auto_graph,
+                            size: 40,
+                            color: Colors.black12,
+                          ),
                           SizedBox(height: 6),
                           Text(
-                            "Click 'Predict' to run regression model",
+                            "Click 'Predict' to see selected date prediction Price",
                             style: TextStyle(color: Colors.black38),
                           ),
                         ],
@@ -362,12 +387,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kGreen,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
                 child: Text(
                   _showPredictions ? 'RE-PREDICT' : 'PREDICT',
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
