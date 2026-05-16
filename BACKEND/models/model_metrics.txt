@@ -1,0 +1,160 @@
+==========================================================================================
+Maize Price Forecast - Horizon-specific Model Metrics (Time Split)
+==========================================================================================
+Training Date: 2026-05-16 14:11:24
+==========================================================================================
+
+Horizon +1d
+  Features: 60
+  Rows: total=1785, train=1428, val=357
+  Train MAE:  1.4903
+  Train RMSE: 1.9744
+  Train R²:   0.983387
+  Val MAE:    5.5445
+  Val RMSE:   7.0111
+  Val R²:     0.146155
+  Model Path: models/gbr_horizon_01.pkl
+
+Horizon +2d
+  Features: 57
+  Rows: total=1784, train=1427, val=357
+  Train MAE:  1.5113
+  Train RMSE: 1.9861
+  Train R²:   0.983179
+  Val MAE:    5.4839
+  Val RMSE:   7.1999
+  Val R²:     0.099556
+  Model Path: models/gbr_horizon_02.pkl
+
+Horizon +3d
+  Features: 54
+  Rows: total=1783, train=1426, val=357
+  Train MAE:  1.4906
+  Train RMSE: 1.9416
+  Train R²:   0.983912
+  Val MAE:    6.7657
+  Val RMSE:   9.0303
+  Val R²:     -0.416490
+  Model Path: models/gbr_horizon_03.pkl
+
+Horizon +4d
+  Features: 51
+  Rows: total=1782, train=1425, val=357
+  Train MAE:  1.5341
+  Train RMSE: 1.9721
+  Train R²:   0.983399
+  Val MAE:    6.1343
+  Val RMSE:   8.2902
+  Val R²:     -0.193803
+  Model Path: models/gbr_horizon_04.pkl
+
+Horizon +5d
+  Features: 51
+  Rows: total=1781, train=1424, val=357
+  Train MAE:  1.6006
+  Train RMSE: 2.0473
+  Train R²:   0.982093
+  Val MAE:    7.7594
+  Val RMSE:   10.4028
+  Val R²:     -0.879756
+  Model Path: models/gbr_horizon_05.pkl
+
+Horizon +6d
+  Features: 48
+  Rows: total=1780, train=1424, val=356
+  Train MAE:  1.5688
+  Train RMSE: 1.9791
+  Train R²:   0.983244
+  Val MAE:    7.7830
+  Val RMSE:   10.1040
+  Val R²:     -0.769648
+  Model Path: models/gbr_horizon_06.pkl
+
+Horizon +7d
+  Features: 48
+  Rows: total=1779, train=1423, val=356
+  Train MAE:  1.4991
+  Train RMSE: 1.9506
+  Train R²:   0.983711
+  Val MAE:    5.8589
+  Val RMSE:   8.3808
+  Val R²:     -0.217497
+  Model Path: models/gbr_horizon_07.pkl
+
+Horizon +8d
+  Features: 45
+  Rows: total=1778, train=1422, val=356
+  Train MAE:  1.6003
+  Train RMSE: 2.1124
+  Train R²:   0.980881
+  Val MAE:    10.4849
+  Val RMSE:   14.4331
+  Val R²:     -2.610964
+  Model Path: models/gbr_horizon_08.pkl
+
+Horizon +9d
+  Features: 45
+  Rows: total=1777, train=1421, val=356
+  Train MAE:  1.6165
+  Train RMSE: 2.1198
+  Train R²:   0.980742
+  Val MAE:    10.7692
+  Val RMSE:   14.8216
+  Val R²:     -2.807957
+  Model Path: models/gbr_horizon_09.pkl
+
+Horizon +10d
+  Features: 45
+  Rows: total=1776, train=1420, val=356
+  Train MAE:  1.4953
+  Train RMSE: 1.9414
+  Train R²:   0.983830
+  Val MAE:    7.6903
+  Val RMSE:   10.3579
+  Val R²:     -0.859713
+  Model Path: models/gbr_horizon_10.pkl
+
+Horizon +11d
+  Features: 42
+  Rows: total=1775, train=1420, val=355
+  Train MAE:  1.6481
+  Train RMSE: 2.1472
+  Train R²:   0.980204
+  Val MAE:    6.3420
+  Val RMSE:   8.3562
+  Val R²:     -0.207096
+  Model Path: models/gbr_horizon_11.pkl
+
+Horizon +12d
+  Features: 42
+  Rows: total=1774, train=1419, val=355
+  Train MAE:  1.6202
+  Train RMSE: 2.0911
+  Train R²:   0.981219
+  Val MAE:    6.1962
+  Val RMSE:   8.5718
+  Val R²:     -0.270178
+  Model Path: models/gbr_horizon_12.pkl
+
+Horizon +13d
+  Features: 42
+  Rows: total=1773, train=1418, val=355
+  Train MAE:  1.5363
+  Train RMSE: 1.9777
+  Train R²:   0.983193
+  Val MAE:    5.8704
+  Val RMSE:   7.7391
+  Val R²:     -0.035386
+  Model Path: models/gbr_horizon_13.pkl
+
+Horizon +14d
+  Features: 42
+  Rows: total=1772, train=1417, val=355
+  Train MAE:  1.5141
+  Train RMSE: 1.9664
+  Train R²:   0.983381
+  Val MAE:    5.8214
+  Val RMSE:   7.5291
+  Val R²:     0.020041
+  Model Path: models/gbr_horizon_14.pkl
+

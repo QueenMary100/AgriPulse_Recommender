@@ -1,0 +1,55 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+
+# Keep local backend venv out of monorepo
+agripulse_backend/venv/
+django-backend
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.packages
+build/
+**/build/
+
+# Platform tool outputs
+android/.gradle/
+android/local.properties
+ios/Pods/
+ios/.symlinks/
+macos/Pods/
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
+
+# Environment and secrets
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# Optional large local artifacts
+*.sqlite
+
+# Django backend (not part of this repo)
+django-backend/
+MYMODEL/
+docs/
