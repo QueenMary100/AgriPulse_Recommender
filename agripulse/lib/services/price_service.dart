@@ -10,8 +10,7 @@ class PriceService {
   // --dart-define=PREDICTION_API_URL=http://127.0.0.1:8000/api/predict/
   // For Android emulator,  http://10.0.2.2:8000/api/predict/
   static const String _defaultPredictionApiUrl =
-      // 'https://agripulse-project.onrender.com/api/predict/';
-      'http://127.0.0.1:8000/predict/';
+      'https://agripulse-recommender.onrender.com/predict/';
   static const String _predictionApiUrl = String.fromEnvironment(
     'PREDICTION_API_URL',
     defaultValue: _defaultPredictionApiUrl,
